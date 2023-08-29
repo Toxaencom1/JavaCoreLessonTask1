@@ -1,0 +1,98 @@
+Windows PowerShell
+(C) Корпорация Майкрософт (Microsoft Corporation). Все права защищены.
+
+Установите последнюю версию PowerShell для новых функций и улучшения! https://aka.ms/PSWindows
+
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1> cd src
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src> cd main/java/lesson1
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main\java\lesson1> javac --version
+javac 20.0.2
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main\java\lesson1> java --version 
+java 20.0.2 2023-07-18
+Java(TM) SE Runtime Environment (build 20.0.2+9-78)
+Java HotSpot(TM) 64-Bit Server VM (build 20.0.2+9-78, mixed mode, sharing)
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main\java\lesson1> cd ..
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main\java> cd ..
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main> javac -sourcepath ./java -d out java/lesson1/sample/Main.java
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main> java -classpath ./out lesson1.sample.Main
+Enter number <a>: 5
+Enter operator: *
+Enter number <b>: 3
+Result your operation is: 15
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main> javadoc -d docs -sourcepath ./java -cp ./out -subpackages lesson1
+Loading source files for package lesson1...
+Constructing Javadoc information...
+Creating destination directory: "docs\"
+Building index for all the packages and classes...
+Standard Doclet version 20.0.2+9-78
+Building tree for all the packages and classes...
+Generating docs\lesson1\regular\Functions.html...
+.\java\lesson1\regular\Functions.java:7: warning: use of default constructor, which does not provide a comment
+public class Functions {
+       ^
+Generating docs\lesson1\sample\Main.html...
+.\java\lesson1\sample\Main.java:10: warning: no comment
+public class Main {
+       ^
+.\java\lesson1\sample\Main.java:10: warning: use of default constructor, which does not provide a comment
+public class Main {
+       ^
+Generating docs\lesson1\regular\outputDecorator.html...
+.\java\lesson1\regular\outputDecorator.java:9: warning: use of default constructor, which does not provide a comment
+public class outputDecorator {
+       ^
+Generating docs\lesson1\regular\ScannerSingleton.html...
+.\java\lesson1\regular\ScannerSingleton.java:10: warning: use of default constructor, which does not provide a comment
+public class ScannerSingleton {
+       ^
+Generating docs\lesson1\regular\Validator.html...
+.\java\lesson1\regular\Validator.java:12: warning: no comment
+    public Validator() {
+           ^
+Generating docs\lesson1\regular\package-summary.html...
+Generating docs\lesson1\regular\package-tree.html...
+Generating docs\lesson1\sample\package-summary.html...
+Generating docs\lesson1\sample\package-tree.html...
+Generating docs\overview-tree.html...
+Generating docs\index.html...
+Building index for all classes...
+Generating docs\allclasses-index.html...
+Generating docs\allpackages-index.html...
+Generating docs\index-all.html...
+Generating docs\search.html...
+Generating docs\overview-summary.html...
+Generating docs\help-doc.html...
+6 warnings
+
+/* dockerfile
+*
+FROM openjdk:20-jdk
+
+COPY ./java /src
+RUN mkdir ./out
+RUN javac -sourcepath ./src -d out src/lesson1/sample/Main.java
+CMD java -classpath ./out lesson1.sample.Main
+*
+*/
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main> docker build -t open-jdk-20 . 
+[+] Building 1.7s (9/9) FINISHED                                                                                                                      docker:default
+ => [internal] load build definition from dockerfile                                                                                                            0.0s
+ => => transferring dockerfile: 209B                                                                                                                            0.0s 
+ => [internal] load .dockerignore                                                                                                                               0.0s 
+ => => transferring context: 2B                                                                                                                                 0.0s 
+ => [internal] load metadata for docker.io/library/openjdk:20-jdk                                                                                               0.0s 
+ => [internal] load build context                                                                                                                               0.1s 
+ => => transferring context: 419B                                                                                                                               0.0s 
+ => [1/4] FROM docker.io/library/openjdk:20-jdk                                                                                                                 0.1s
+ => [2/4] COPY ./java /src                                                                                                                                      0.0s 
+ => [3/4] RUN mkdir ./out                                                                                                                                       0.4s 
+ => [4/4] RUN javac -sourcepath ./src -d out src/lesson1/sample/Main.java                                                                                       1.0s 
+ => exporting to image                                                                                                                                          0.1s 
+ => => exporting layers                                                                                                                                         0.1s 
+ => => writing image sha256:22e4d6674ae923ee024bf68171a33b3dbaa2d94c9fbcef17ef901932177e5b23                                                                    0.0s 
+ => => naming to docker.io/library/open-jdk-20
+PS C:\Users\Toxae\IdeaProjects\JavaCoreLessonTask1\src\main> docker run --name calcapp -it open-jdk-20
+Enter number <a>: 5
+Enter operator: -
+Enter number <b>: 2
+Result your operation is: 3

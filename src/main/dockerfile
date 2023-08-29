@@ -1,0 +1,6 @@
+FROM openjdk:20-jdk
+
+COPY ./java /src
+RUN mkdir ./out
+RUN javac -sourcepath ./src -d out src/lesson1/sample/Main.java
+CMD java -classpath ./out lesson1.sample.Main
